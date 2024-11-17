@@ -40,9 +40,7 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          source: |
-            todo/build/libs/*.jar
-            scripts/deploy.sh
+          source: "todo/build/libs/*.jar,scripts/deploy.sh"
           strip_components: 1
           target: "/home/${{ secrets.USER }}/download"
 
