@@ -36,6 +36,19 @@ jobs:
       - name: Run build with Gradle Wrapper
         run: ./gradlew clean build -x test
 
+      - name: Check file existence
+        id: check_files
+        run: |
+          if [ -f "builds/libs/todo-0.0.1-SNAPSHOT.jar" ]; then
+            echo "JAR exists"
+          else
+            echo "JAR not found"
+            exit 1
+          fi
+
+      - name: Copy deploy script
+        run: cp scripts/deploy.sh builds/libs/
+
       - name: Send files to the server
         uses: appleboy/scp-action@master
         with:
@@ -43,19 +56,19 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          source: "./builds/libs/todo-0.0.1-SNAPSHOT.jar"
-          strip_components: 1
+          source: "builds/libs/*"
+          strip_components: 2
           target: "/home/${{ secrets.USER }}/download"
 
-#      - name: Deploy remote ssh commands using password
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USER }}
-#          password: ${{ secrets.PASSWORD }}
-#          port: ${{ secrets.SSH_PORT }}
-#          script_stop: true
-#          script: |
-#            mkdir -p /home/${{ secrets.USER }}/deploy
-#            chmod +x /home/${{ secrets.USER }}/download/deploy.sh
-#            sh /home/${{ secrets.USER }}/download/deploy.sh
+      - name: Deploy remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script_stop: true
+          script: |
+            mkdir -p /home/${{ secrets.USER }}/deploy
+            chmod +x /home/${{ secrets.USER }}/download/deploy.sh
+            sh /home/${{ secrets.USER }}/download/deploy.sh
