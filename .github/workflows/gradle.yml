@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          source: "./build/libs/todo-0.0.1.SNAPSHOT.jar"
+          source: "./builds/libs/todo-0.0.1.SNAPSHOT.jar"
           strip_components: 1
           target: "/home/${{ secrets.USER }}/download"
 
