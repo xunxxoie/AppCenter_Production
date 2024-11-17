@@ -40,19 +40,19 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          source: "./build/libs/*.jar"
+          source: "./build/libs/todo-0.0.1.SNAPSHOT.jar"
           strip_components: 1
           target: "/home/${{ secrets.USER }}/download"
 
-      - name: Deploy remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          script_stop: true
-          script: |
-            mkdir -p /home/${{ secrets.USER }}/deploy
-            chmod +x /home/${{ secrets.USER }}/download/deploy.sh
-            sh /home/${{ secrets.USER }}/download/deploy.sh
+#      - name: Deploy remote ssh commands using password
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.HOST }}
+#          username: ${{ secrets.USER }}
+#          password: ${{ secrets.PASSWORD }}
+#          port: ${{ secrets.SSH_PORT }}
+#          script_stop: true
+#          script: |
+#            mkdir -p /home/${{ secrets.USER }}/deploy
+#            chmod +x /home/${{ secrets.USER }}/download/deploy.sh
+#            sh /home/${{ secrets.USER }}/download/deploy.sh
