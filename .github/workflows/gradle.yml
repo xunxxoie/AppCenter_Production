@@ -46,7 +46,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           source: "todo/builds/libs/todo-0.0.1-SNAPSHOT.jar,todo/scripts/deploy.sh"
-          target: "/home/${{ secrets.USER }}/download"
+          target: "/home/${{ secrets.USER }}/download/todo"
           strip_components: 2
 
       - name: Deploy remote ssh commands using password
