@@ -2,8 +2,8 @@
 echo "> 현재 USER NAME을 가져옵니다."
 CURRENT_USER=$(whoami)
 
-echo "> download 폴더의 jar 파일을 deploy 폴더로 복사합니다."
-cp /home/$CURRENT_USER/download/todo/*.jar /home/$CURRENT_USER/deploy/
+echo "> download 폴더에서 build된 .jar 파일을 가져옵니다."
+cp /home/$CURRENT_USER/download/todo/builds/libs/*.jar /home/$CURRENT_USER/deploy/
 
 echo "> deploy 폴더에서 plain.jar 파일을 찾고, 파일이 있다면 삭제합니다."
 find /home/$CURRENT_USER/deploy -name "*plain*" -delete 2>/dev/null || true
