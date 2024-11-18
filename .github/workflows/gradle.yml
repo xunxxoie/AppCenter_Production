@@ -45,7 +45,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "todo/scripts/deploy.sh,todo/builds/libs/*.jar"
           target: "/home/${{ secrets.USER }}/download/todo"
-          strip_components: 2
+          strip_components: 1
 
       - name: Deploy remote ssh commands
         uses: appleboy/ssh-action@master
