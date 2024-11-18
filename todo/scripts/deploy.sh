@@ -26,6 +26,7 @@ echo "> 새 애플리케이션을 시작합니다."
 cd /home/$CURRENT_USER/deploy
 nohup java -jar \
     -Dspring.profiles.active=prod \
+    -Dserver.port=5152 \
     $(ls -t *.jar | grep -v 'plain' | head -n1) \
     1>stdout.txt 2>stderr.txt &
 
